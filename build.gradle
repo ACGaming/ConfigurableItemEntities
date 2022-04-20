@@ -44,7 +44,8 @@ minecraft {
 jar {
     manifest {
         attributes 'FMLCorePlugin': 'mod.acgaming.cie.core.CIELoadingPlugin'
-        attributes 'FMLCorePluginContainsMod': 'true'
+        attributes 'FMLCorePluginContainsFMLMod': 'true'
+        attributes 'ForceLoadAsMod': 'true'
     }
 }
 
