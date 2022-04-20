@@ -1,0 +1,20 @@
+[
+  {
+    "modid": "cie",
+    "name": "CIE",
+    "description": "Questionable item entity stacking",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": [
+      "ACGaming"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mixinbooter"
+    ]
+  }
+]

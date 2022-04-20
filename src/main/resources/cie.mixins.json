@@ -1,0 +1,12 @@
+{
+  "package": "mod.acgaming.cie.mixin",
+  "refmap": "cie.refmap.json",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "EntityItemMixin", "NetHandlerPlayServerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
