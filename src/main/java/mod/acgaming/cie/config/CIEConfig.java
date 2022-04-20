@@ -12,8 +12,16 @@ import mod.acgaming.cie.CIE;
 public class CIEConfig
 {
     @Config.Name("Disable Stacking")
-    @Config.Comment("Disable stacking of item entities in the world")
+    @Config.Comment({"Disable stacking of item entities in the world?", "Default = true, Vanilla = false"})
     public static boolean disableStacking = true;
+
+    @Config.Name("Rotate")
+    @Config.Comment({"Should items rotate?", "Default = false, Vanilla = true"})
+    public static boolean shouldRotate = false;
+
+    @Config.Name("Bob")
+    @Config.Comment({"Should items have a bob effect?", "Default = false, Vanilla = true"})
+    public static boolean shouldBob = false;
 
     @Mod.EventBusSubscriber(modid = CIE.MODID)
     public static class EventHandler

@@ -1,7 +1,5 @@
 package mod.acgaming.cie.mixin;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -51,7 +49,6 @@ public abstract class EntityItemMixin extends Entity
     }
 
     @Override
-    @Nullable
     public AxisAlignedBB getCollisionBox(Entity entity)
     {
         return entity.canBePushed() ? entity.getEntityBoundingBox() : null;
