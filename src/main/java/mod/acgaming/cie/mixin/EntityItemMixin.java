@@ -29,20 +29,28 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public AxisAlignedBB getCollisionBoundingBox()
     {
-        return this.getEntityBoundingBox();
+        if (CIEConfig.gItemPhysics) return this.getEntityBoundingBox();
+        else return null;
     }
 
     @Override
     public void applyEntityCollision(Entity entity)
     {
-        if (entity instanceof EntityItem)
+        if (CIEConfig.gItemPhysics)
         {
-            if (entity.getEntityBoundingBox().minY < this.getEntityBoundingBox().maxY)
+            if (entity instanceof EntityItem)
+            {
+                if (entity.getEntityBoundingBox().minY < this.getEntityBoundingBox().maxY)
+                {
+                    super.applyEntityCollision(entity);
+                }
+            }
+            else if (entity.getEntityBoundingBox().minY <= this.getEntityBoundingBox().minY)
             {
                 super.applyEntityCollision(entity);
             }
         }
-        else if (entity.getEntityBoundingBox().minY <= this.getEntityBoundingBox().minY)
+        else
         {
             super.applyEntityCollision(entity);
         }
@@ -51,13 +59,13 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public boolean canBeCollidedWith()
     {
-        return !Loader.isModLoaded("realdrops");
+        return CIEConfig.gItemPhysics || !Loader.isModLoaded("realdrops");
     }
 
     @Override
     public boolean canBePushed()
     {
-        return true;
+        return CIEConfig.gItemPhysics;
     }
 
     @Override
@@ -80,7 +88,7 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public AxisAlignedBB getCollisionBox(Entity entity)
     {
-        return entity.canBePushed() ? entity.getEntityBoundingBox() : null;
+        return CIEConfig.gItemPhysics || entity.canBePushed() ? entity.getEntityBoundingBox() : null;
     }
 
     @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)
