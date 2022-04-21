@@ -1,2 +1,2 @@
-# Configurable Item Entities
+# Configurable Item Entities (CIE)
 Redefining dropped items™

@@ -1,7 +1,7 @@
 [
   {
     "modid": "cie",
-    "name": "Configurable Item Entities",
+    "name": "Configurable Item Entities (CIE)",
     "description": "Redefining dropped items",
     "version": "${version}",
     "mcversion": "${mcversion}",

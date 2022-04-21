@@ -12,7 +12,7 @@ public class CIEContainer extends DummyModContainer
         super(new ModMetadata());
         ModMetadata meta = this.getMetadata();
         meta.modId = "ciecore";
-        meta.name = "CIECore";
+        meta.name = "CIE Core";
         meta.description = "Core functionality of CIE";
         meta.version = "1.12.2-1.0.0";
         meta.authorList.add("ACGaming");

@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 public class CIE
 {
     public static final String MODID = "cie";
-    public static final String NAME = "CIE";
+    public static final String NAME = "Configurable Item Entities (CIE)";
     public static final String VERSION = "1.12.2-1.0.0";
     public static final Logger LOGGER = LogManager.getLogger("CIE");
 
