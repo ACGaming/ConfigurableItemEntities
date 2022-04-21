@@ -36,16 +36,17 @@ public abstract class RenderEntityItemMixin extends Render<EntityItem>
 
         boolean flag = ibakedmodel.isGui3d();
         int i = this.getModelCount(itemstack);
-        float f1 = CIEConfig.shouldBob ? MathHelper.sin(((float) itemIn.getAge() + partialTicks) / 10.0F + itemIn.hoverStart) * 0.1F + 0.1F : 0;
-        float f2 = CIEConfig.shouldBob ? ibakedmodel.getItemCameraTransforms().getTransform(ItemCameraTransforms.TransformType.GROUND).scale.y : 0;
+        float f1 = CIEConfig.rBob ? MathHelper.sin(((float) itemIn.getAge() + partialTicks) / 10.0F + itemIn.hoverStart) * 0.1F + 0.1F : 0;
+        float f2 = CIEConfig.rBob ? ibakedmodel.getItemCameraTransforms().getTransform(ItemCameraTransforms.TransformType.GROUND).scale.y : 0;
 
-        if (CIEConfig.shouldBob) GlStateManager.translate((float) x, (float) y + f1 + 0.25F * f2, (float) z);
+        if (CIEConfig.rBob) GlStateManager.translate((float) x, (float) y + f1 + 0.25F * f2, (float) z);
         else GlStateManager.translate((float) x, (float) y - 0.05F, (float) z);
 
         if (flag || this.renderManager.options != null)
         {
-            float f3 = CIEConfig.shouldRotate ? (((float) itemIn.getAge() + partialTicks) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI) : 0;
-            if (CIEConfig.shouldRotate) GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
+            float f3 = CIEConfig.rRotate ? (((float) itemIn.getAge() + partialTicks) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI) : 0;
+            if (CIEConfig.rRotate) GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
+            else if (CIEConfig.rVariation) GlStateManager.rotate(itemIn.hoverStart * (float) CIEConfig.rVariationAngle, 1.0F, 2.0F, 1.0F);
         }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

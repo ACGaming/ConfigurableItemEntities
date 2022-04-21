@@ -61,9 +61,9 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
     {
-        if (!CIEConfig.automaticPickup)
+        if (!CIEConfig.gPickupAutomatic)
         {
-            if (!CIEConfig.sneakingPickup || player.isSneaking())
+            if (!CIEConfig.gPickupSneaking || player.isSneaking())
             {
                 playerInteraction = true;
                 this.onCollideWithPlayer(player);
@@ -84,18 +84,18 @@ public abstract class EntityItemMixin extends Entity
     @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)
     public void CIE_onCollideWithPlayer(EntityPlayer entityIn, CallbackInfo ci)
     {
-        if (!CIEConfig.automaticPickup && !playerInteraction || CIEConfig.sneakingPickup && !entityIn.isSneaking()) ci.cancel();
+        if (!CIEConfig.gPickupAutomatic && !playerInteraction || CIEConfig.gPickupSneaking && !entityIn.isSneaking()) ci.cancel();
     }
 
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
     private void CIE_searchForOtherItemsNearby(CallbackInfo ci)
     {
-        if (!CIEConfig.shouldCombine) ci.cancel();
+        if (!CIEConfig.gCombining) ci.cancel();
     }
 
     @Inject(method = "combineItems", at = @At("HEAD"), cancellable = true)
     private void CIE_combineItems(EntityItem other, CallbackInfoReturnable<Boolean> cir)
     {
-        if (!CIEConfig.shouldCombine) cir.setReturnValue(false);
+        if (!CIEConfig.gCombining) cir.setReturnValue(false);
     }
 }

@@ -17,6 +17,6 @@ public class ItemMixin
     @Overwrite(remap = false)
     public int getEntityLifespan(ItemStack itemStack, World world)
     {
-        return CIEConfig.entityLifespan;
+        return CIEConfig.gEntityLifespan;
     }
 }
