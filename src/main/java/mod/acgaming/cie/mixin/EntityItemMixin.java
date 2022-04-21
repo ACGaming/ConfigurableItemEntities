@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
 import mod.acgaming.cie.config.CIEConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -50,7 +51,7 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public boolean canBeCollidedWith()
     {
-        return true;
+        return !Loader.isModLoaded("realdrops");
     }
 
     @Override
@@ -86,7 +87,7 @@ public abstract class EntityItemMixin extends Entity
     public void CIE_onCollideWithPlayer(EntityPlayer entityIn, CallbackInfo ci)
     {
         Item heldItem = entityIn.getHeldItem(CIEConfig.gCollectionToolHand).getItem();
-        if (!CIEConfig.gPickupAutomatic && !playerInteraction && !CIEConfig.isCollectionTool(heldItem) || CIEConfig.gPickupSneaking && !entityIn.isSneaking())
+        if (!CIEConfig.gPickupAutomatic && !playerInteraction && !CIEConfig.isCollectionTool(heldItem) && !Loader.isModLoaded("realdrops") || CIEConfig.gPickupSneaking && !entityIn.isSneaking())
         {
             ci.cancel();
         }
