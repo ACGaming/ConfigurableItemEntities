@@ -5,16 +5,10 @@
     "description": "Redefining dropped items",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "",
-    "updateUrl": "",
-    "authorList": [
-      "ACGaming"
-    ],
-    "credits": "",
-    "logoFile": "",
-    "screenshots": [],
-    "dependencies": [
-      "mixinbooter"
-    ]
+    "url": "https://github.com/ACGaming/ConfigurableItemEntities",
+    "authorList": ["ACGaming"],
+    "credits": "Rongmario, Funwayguy",
+    "useDependencyInformation": true,
+    "dependencies": ["mixinbooter"]
   }
 ]

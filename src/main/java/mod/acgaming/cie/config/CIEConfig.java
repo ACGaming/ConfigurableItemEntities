@@ -1,5 +1,6 @@
 package mod.acgaming.cie.config;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -27,6 +28,10 @@ public class CIEConfig
     @Config.Comment({"Should item entities be combined in the world?", "Default = false, Vanilla = true"})
     public static boolean gCombining = false;
 
+    @Config.Name("Gameplay: Collection Tool")
+    @Config.Comment("Tools which enable picking up items automatically when held in the off-hand")
+    public static String[] collectionTool = {"minecraft:bucket"};
+
     @Config.Name("Rendering: Bob")
     @Config.Comment({"Should item entities have a bob effect?", "Default = false, Vanilla = true"})
     public static boolean rBob = false;
@@ -38,6 +43,19 @@ public class CIEConfig
     @Config.Name("Rendering: Variation")
     @Config.Comment({"Strength of the angular variation", "Default = 10, Vanilla = 0"})
     public static int rVariationStrength = 10;
+
+    public static boolean isCollectionTool(Item item)
+    {
+        String regName = item.getRegistryName().toString();
+        for (String s : collectionTool)
+        {
+            if (regName.equals(s))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Mod.EventBusSubscriber(modid = CIE.MODID)
     public static class EventHandler

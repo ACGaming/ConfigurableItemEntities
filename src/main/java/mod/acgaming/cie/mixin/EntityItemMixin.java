@@ -3,6 +3,7 @@ package mod.acgaming.cie.mixin;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -84,7 +85,11 @@ public abstract class EntityItemMixin extends Entity
     @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)
     public void CIE_onCollideWithPlayer(EntityPlayer entityIn, CallbackInfo ci)
     {
-        if (!CIEConfig.gPickupAutomatic && !playerInteraction || CIEConfig.gPickupSneaking && !entityIn.isSneaking()) ci.cancel();
+        Item offhandItem = entityIn.getHeldItemOffhand().getItem();
+        if (!CIEConfig.gPickupAutomatic && !playerInteraction && !CIEConfig.isCollectionTool(offhandItem) || CIEConfig.gPickupSneaking && !entityIn.isSneaking())
+        {
+            ci.cancel();
+        }
     }
 
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
