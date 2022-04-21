@@ -4,9 +4,7 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": ["EntityItemMixin", "ItemMixin", "NetHandlerPlayServerMixin"],
-  "client": [
-    "RenderEntityItemMixin"
-  ],
+  "client": ["RenderEntityItemMixin"],
   "injectors": {
     "defaultRequire": 1
   }

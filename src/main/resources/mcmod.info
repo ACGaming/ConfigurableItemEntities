@@ -1,8 +1,8 @@
 [
   {
     "modid": "cie",
-    "name": "CIE",
-    "description": "Questionable item entity stacking",
+    "name": "Configurable Item Entities",
+    "description": "Redefining dropped items",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "",

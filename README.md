@@ -1,2 +1,2 @@
-# CursedItemEntities
- Questionable item entity stacking
+# Configurable Item Entities
+Redefining dropped items™
