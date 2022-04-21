@@ -23,9 +23,9 @@ public class CIEConfig
     @Config.Comment({"Time in ticks until item entities get despawned", "Default = 6000, Vanilla = 6000"})
     public static int entityLifespan = 6000;
 
-    @Config.Name("Gameplay: Stacking")
-    @Config.Comment({"Should item entities be stacked in the world?", "Default = false, Vanilla = true"})
-    public static boolean shouldStack = false;
+    @Config.Name("Gameplay: Combining")
+    @Config.Comment({"Should item entities be combined in the world?", "Default = false, Vanilla = true"})
+    public static boolean shouldCombine = false;
 
     @Config.Name("Rendering: Bob")
     @Config.Comment({"Should item entities have a bob effect?", "Default = false, Vanilla = true"})

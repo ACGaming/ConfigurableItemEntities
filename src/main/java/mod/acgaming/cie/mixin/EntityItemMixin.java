@@ -90,12 +90,12 @@ public abstract class EntityItemMixin extends Entity
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
     private void CIE_searchForOtherItemsNearby(CallbackInfo ci)
     {
-        if (!CIEConfig.shouldStack) ci.cancel();
+        if (!CIEConfig.shouldCombine) ci.cancel();
     }
 
     @Inject(method = "combineItems", at = @At("HEAD"), cancellable = true)
     private void CIE_combineItems(EntityItem other, CallbackInfoReturnable<Boolean> cir)
     {
-        if (!CIEConfig.shouldStack) cir.setReturnValue(false);
+        if (!CIEConfig.shouldCombine) cir.setReturnValue(false);
     }
 }
