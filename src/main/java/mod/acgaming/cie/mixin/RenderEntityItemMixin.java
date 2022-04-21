@@ -24,29 +24,7 @@ public abstract class RenderEntityItemMixin extends Render<EntityItem>
     }
 
     @Shadow
-    protected int getModelCount(ItemStack stack)
-    {
-        int i = 1;
-
-        if (stack.getCount() > 48)
-        {
-            i = 5;
-        }
-        else if (stack.getCount() > 32)
-        {
-            i = 4;
-        }
-        else if (stack.getCount() > 16)
-        {
-            i = 3;
-        }
-        else if (stack.getCount() > 1)
-        {
-            i = 2;
-        }
-
-        return i;
-    }
+    protected int getModelCount(ItemStack stack) {return 0;}
 
     /**
      * @author ACGaming

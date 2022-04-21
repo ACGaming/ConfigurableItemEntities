@@ -3,10 +3,7 @@
   "refmap": "cie.refmap.json",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-    "EntityItemMixin",
-    "NetHandlerPlayServerMixin"
-  ],
+  "mixins": ["EntityItemMixin", "ItemMixin", "NetHandlerPlayServerMixin"],
   "client": [
     "RenderEntityItemMixin"
   ],

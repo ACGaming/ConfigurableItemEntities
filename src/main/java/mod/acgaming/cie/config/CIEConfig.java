@@ -11,17 +11,29 @@ import mod.acgaming.cie.CIE;
 @Config(modid = CIE.MODID, name = "CIE")
 public class CIEConfig
 {
-    @Config.Name("Disable Stacking")
-    @Config.Comment({"Disable stacking of item entities in the world?", "Default = true, Vanilla = false"})
-    public static boolean disableStacking = true;
+    @Config.Name("Gameplay: Automatic Pickup")
+    @Config.Comment({"Should item entities be picked up automatically?", "Default = false, Vanilla = true"})
+    public static boolean automaticPickup = false;
 
-    @Config.Name("Rotate")
-    @Config.Comment({"Should items rotate?", "Default = false, Vanilla = true"})
-    public static boolean shouldRotate = false;
+    @Config.Name("Gameplay: Sneaking Pickup")
+    @Config.Comment({"Should item entities only be picked up when sneaking?", "Default = false, Vanilla = false"})
+    public static boolean sneakingPickup = false;
 
-    @Config.Name("Bob")
-    @Config.Comment({"Should items have a bob effect?", "Default = false, Vanilla = true"})
+    @Config.Name("Gameplay: Entity Lifespan")
+    @Config.Comment({"Time in ticks until item entities get despawned", "Default = 6000, Vanilla = 6000"})
+    public static int entityLifespan = 6000;
+
+    @Config.Name("Gameplay: Stacking")
+    @Config.Comment({"Should item entities be stacked in the world?", "Default = false, Vanilla = true"})
+    public static boolean shouldStack = false;
+
+    @Config.Name("Rendering: Bob")
+    @Config.Comment({"Should item entities have a bob effect?", "Default = false, Vanilla = true"})
     public static boolean shouldBob = false;
+
+    @Config.Name("Rendering: Rotate")
+    @Config.Comment({"Should item entities rotate?", "Default = false, Vanilla = true"})
+    public static boolean shouldRotate = false;
 
     @Mod.EventBusSubscriber(modid = CIE.MODID)
     public static class EventHandler

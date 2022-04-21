@@ -2,6 +2,8 @@ package mod.acgaming.cie.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 
@@ -15,6 +17,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EntityItem.class)
 public abstract class EntityItemMixin extends Entity
 {
+    private boolean playerInteraction;
+
     public EntityItemMixin(World worldIn)
     {
         super(worldIn);
@@ -43,9 +47,32 @@ public abstract class EntityItemMixin extends Entity
     }
 
     @Override
+    public boolean canBeCollidedWith()
+    {
+        return true;
+    }
+
+    @Override
     public boolean canBePushed()
     {
         return true;
+    }
+
+    @Override
+    public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
+    {
+        if (!CIEConfig.automaticPickup)
+        {
+            if (!CIEConfig.sneakingPickup || player.isSneaking())
+            {
+                playerInteraction = true;
+                this.onCollideWithPlayer(player);
+                playerInteraction = false;
+                return true;
+            }
+        }
+        playerInteraction = false;
+        return false;
     }
 
     @Override
@@ -54,15 +81,21 @@ public abstract class EntityItemMixin extends Entity
         return entity.canBePushed() ? entity.getEntityBoundingBox() : null;
     }
 
+    @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)
+    public void CIE_onCollideWithPlayer(EntityPlayer entityIn, CallbackInfo ci)
+    {
+        if (!CIEConfig.automaticPickup && !playerInteraction || CIEConfig.sneakingPickup && !entityIn.isSneaking()) ci.cancel();
+    }
+
     @Inject(method = "searchForOtherItemsNearby", at = @At("HEAD"), cancellable = true)
     private void CIE_searchForOtherItemsNearby(CallbackInfo ci)
     {
-        if (CIEConfig.disableStacking) ci.cancel();
+        if (!CIEConfig.shouldStack) ci.cancel();
     }
 
     @Inject(method = "combineItems", at = @At("HEAD"), cancellable = true)
     private void CIE_combineItems(EntityItem other, CallbackInfoReturnable<Boolean> cir)
     {
-        if (CIEConfig.disableStacking) cir.setReturnValue(false);
+        if (!CIEConfig.shouldStack) cir.setReturnValue(false);
     }
 }
