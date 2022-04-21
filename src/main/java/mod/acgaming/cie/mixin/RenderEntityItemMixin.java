@@ -46,7 +46,7 @@ public abstract class RenderEntityItemMixin extends Render<EntityItem>
         {
             float f3 = CIEConfig.rRotate ? (((float) itemIn.getAge() + partialTicks) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI) : 0;
             if (CIEConfig.rRotate) GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
-            else if (CIEConfig.rVariation) GlStateManager.rotate(itemIn.hoverStart * (float) CIEConfig.rVariationAngle, 1.0F, 2.0F, 1.0F);
+            else if (CIEConfig.rVariationStrength > 0) GlStateManager.rotate(itemIn.hoverStart * (float) CIEConfig.rVariationStrength, 1.0F, 2.0F, 1.0F);
         }
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

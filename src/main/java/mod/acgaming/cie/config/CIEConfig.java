@@ -36,12 +36,8 @@ public class CIEConfig
     public static boolean rRotate = false;
 
     @Config.Name("Rendering: Variation")
-    @Config.Comment({"Should item entities have angular variation?", "Default = true, Vanilla = false"})
-    public static boolean rVariation = true;
-
-    @Config.Name("Rendering: Variation Strength")
-    @Config.Comment({"Strength of the variation when variation is enabled", "Default = 10, Vanilla = 0"})
-    public static int rVariationAngle = 10;
+    @Config.Comment({"Strength of the angular variation", "Default = 10, Vanilla = 0"})
+    public static int rVariationStrength = 10;
 
     @Mod.EventBusSubscriber(modid = CIE.MODID)
     public static class EventHandler
