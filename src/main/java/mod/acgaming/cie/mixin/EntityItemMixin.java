@@ -85,8 +85,8 @@ public abstract class EntityItemMixin extends Entity
     @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)
     public void CIE_onCollideWithPlayer(EntityPlayer entityIn, CallbackInfo ci)
     {
-        Item offhandItem = entityIn.getHeldItemOffhand().getItem();
-        if (!CIEConfig.gPickupAutomatic && !playerInteraction && !CIEConfig.isCollectionTool(offhandItem) || CIEConfig.gPickupSneaking && !entityIn.isSneaking())
+        Item heldItem = entityIn.getHeldItem(CIEConfig.gCollectionToolHand).getItem();
+        if (!CIEConfig.gPickupAutomatic && !playerInteraction && !CIEConfig.isCollectionTool(heldItem) || CIEConfig.gPickupSneaking && !entityIn.isSneaking())
         {
             ci.cancel();
         }
