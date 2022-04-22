@@ -14,7 +14,7 @@ import mod.acgaming.cie.CIE;
 public class CIEConfig
 {
     @Config.Name("[Gameplay] Item Physics")
-    @Config.Comment({"Should item entities have physical aspects such as bounding boxes?", "Default = true", "Vanilla = false"})
+    @Config.Comment({"Should item entities have physical aspects such as collision boxes?", "Default = true", "Vanilla = false"})
     public static boolean gItemPhysics = true;
 
     @Config.Name("[Gameplay] Automatic Pickup")
