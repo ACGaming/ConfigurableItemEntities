@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
-@Mod(modid = CIE.MODID, name = CIE.NAME, version = CIE.VERSION, acceptedMinecraftVersions = "[1.12.2]", dependencies = "required-after:mixinbooter;after:realdrops")
+@Mod(modid = CIE.MODID, name = CIE.NAME, version = CIE.VERSION, acceptedMinecraftVersions = "[1.12.2]", dependencies = "required-after:mixinbooter;after:hardcorebuoy;after:itemphysic;after:realdrops")
 public class CIE
 {
     public static final String MODID = "cie";
