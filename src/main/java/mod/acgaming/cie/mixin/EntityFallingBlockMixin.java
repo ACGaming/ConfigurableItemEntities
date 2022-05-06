@@ -21,8 +21,6 @@ public abstract class EntityFallingBlockMixin extends Entity
     @Shadow
     public boolean shouldDropItem;
     @Shadow
-    public int fallTime;
-    @Shadow
     private IBlockState fallTile;
 
     public EntityFallingBlockMixin(World worldIn)
