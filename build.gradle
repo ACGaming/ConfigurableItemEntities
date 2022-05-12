@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        jcenter()
         maven {
 			url = "https://maven.minecraftforge.net"
 		}
@@ -19,7 +18,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 
-version = "1.12.2-1.0.2"
+version = "1.12.2-1.0.3"
 group = "mod.acgaming.cie"
 archivesBaseName = "CIE"
 
@@ -68,11 +67,6 @@ repositories {
 
 dependencies {
 	deobfCompile "zone.rong:mixinbooter:4.2"
-	compile('org.spongepowered:mixin:0.8-SNAPSHOT') {
-		exclude module: 'guava'
-		exclude module: 'commons-io'
-		exclude module: 'gson'
-	}
 }
 
 mixin {

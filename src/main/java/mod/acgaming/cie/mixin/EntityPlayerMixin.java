@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(EntityPlayer.class)
+@Mixin(value = EntityPlayer.class, priority = 1002)
 public abstract class EntityPlayerMixin extends EntityLivingBase
 {
     public EntityPlayerMixin(World worldIn)

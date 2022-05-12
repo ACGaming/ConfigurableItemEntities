@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EntityItem.class)
+@Mixin(value = EntityItem.class, priority = 1002)
 public abstract class EntityItemMixin extends Entity
 {
     private boolean playerInteraction;

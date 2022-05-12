@@ -8,7 +8,7 @@ import mod.acgaming.cie.config.CIEConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(Item.class)
+@Mixin(value = Item.class, priority = 1002)
 public class ItemMixin
 {
     /**

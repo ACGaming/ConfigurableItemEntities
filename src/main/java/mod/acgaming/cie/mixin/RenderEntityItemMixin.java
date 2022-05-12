@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-@Mixin(RenderEntityItem.class)
+@Mixin(value = RenderEntityItem.class, priority = 1002)
 public abstract class RenderEntityItemMixin extends Render<EntityItem>
 {
     protected RenderEntityItemMixin(RenderManager renderManager)
