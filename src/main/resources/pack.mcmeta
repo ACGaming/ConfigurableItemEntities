@@ -1,6 +1,6 @@
 {
   "pack": {
-    "pack_format": 3,
-    "description": "CIE assets"
+    "description": "CIE resources",
+    "pack_format": 9
   }
 }
