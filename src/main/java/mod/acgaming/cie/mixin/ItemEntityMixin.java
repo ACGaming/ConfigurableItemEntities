@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 import mod.acgaming.cie.config.CIEConfigHandler;
@@ -21,8 +22,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = ItemEntity.class, priority = 1002)
 public abstract class ItemEntityMixin extends Entity
 {
+    @Inject(method = "areMergable", at = @At("HEAD"), cancellable = true)
+    private static void CIE_areMergable(CallbackInfoReturnable<Boolean> cir)
+    {
+        if (!CIEConfigHandler.GAMEPLAY_SETTINGS.combining.get()) cir.setReturnValue(false);
+    }
+
     @Unique
     public boolean playerInteraction;
+
     @Shadow
     private int pickupDelay;
 
@@ -47,14 +55,12 @@ public abstract class ItemEntityMixin extends Entity
         }
     }
 
-    // --- INTERACTING ---
     @Override
     public boolean isPickable()
     {
         return !this.isRemoved();
     }
 
-    // --- PUSHING ---
     @Override
     public boolean isPushable()
     {
@@ -75,7 +81,6 @@ public abstract class ItemEntityMixin extends Entity
         return InteractionResult.PASS;
     }
 
-    // --- COLLISION ---
     @Override
     public boolean canCollideWith(Entity entity)
     {
@@ -88,7 +93,6 @@ public abstract class ItemEntityMixin extends Entity
         return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
     }
 
-    // --- NO ATTACKING ---
     @Override
     public boolean isAttackable()
     {
@@ -104,8 +108,8 @@ public abstract class ItemEntityMixin extends Entity
     @Inject(method = "playerTouch", at = @At("HEAD"), cancellable = true)
     public void CIE_playerTouch(Player player, CallbackInfo ci)
     {
-        //Item heldItem = player.getItemInHand(CIEConfigHandler.GAMEPLAY_SETTINGS.collectionToolHand.get()).getItem();
-        if (!CIEConfigHandler.GAMEPLAY_SETTINGS.pickupAutomatic.get() && !playerInteraction /*&& !CIEConfigHandler.isCollectionTool(heldItem)*/ || CIEConfigHandler.GAMEPLAY_SETTINGS.pickupCrouching.get() && !player.isCrouching())
+        Item heldItem = player.getItemInHand(CIEConfigHandler.GAMEPLAY_SETTINGS.collectionToolHand.get()).getItem();
+        if (!CIEConfigHandler.GAMEPLAY_SETTINGS.pickupAutomatic.get() && !playerInteraction && !CIEConfigHandler.isCollectionTool(heldItem) || CIEConfigHandler.GAMEPLAY_SETTINGS.pickupCrouching.get() && !player.isCrouching())
         {
             ci.cancel();
         }
@@ -120,15 +124,8 @@ public abstract class ItemEntityMixin extends Entity
         this.pickupDelay = CIEConfigHandler.GAMEPLAY_SETTINGS.pickupDelay.get();
     }
 
-    // --- MERGING ---
     @Inject(method = "isMergable", at = @At("HEAD"), cancellable = true)
     private void CIE_isMergable(CallbackInfoReturnable<Boolean> cir)
-    {
-        if (!CIEConfigHandler.GAMEPLAY_SETTINGS.combining.get()) cir.setReturnValue(false);
-    }
-
-    @Inject(method = "areMergable", at = @At("HEAD"), cancellable = true)
-    private static void CIE_areMergable(CallbackInfoReturnable<Boolean> cir)
     {
         if (!CIEConfigHandler.GAMEPLAY_SETTINGS.combining.get()) cir.setReturnValue(false);
     }

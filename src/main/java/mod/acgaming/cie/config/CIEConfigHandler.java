@@ -1,6 +1,10 @@
 package mod.acgaming.cie.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class CIEConfigHandler
@@ -10,18 +14,18 @@ public class CIEConfigHandler
     public static final RenderingSettings RENDERING_SETTINGS = new RenderingSettings(BUILDER);
     public static final ForgeConfigSpec SPEC = BUILDER.build();
 
-//    public static boolean isCollectionTool(Item item)
-//    {
-//        String regName = item.getRegistryName().toString();
-//        for (String s : CIEConfigHandler.GAMEPLAY_SETTINGS.collectionTool.get())
-//        {
-//            if (regName.equals(s))
-//            {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public static boolean isCollectionTool(Item item)
+    {
+        String regName = item.getRegistryName().toString();
+        for (String s : CIEConfigHandler.GAMEPLAY_SETTINGS.collectionTool.get())
+        {
+            if (regName.equals(s))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static class GameplaySettings
     {
@@ -31,7 +35,7 @@ public class CIEConfigHandler
         public final ForgeConfigSpec.ConfigValue<Boolean> pickupAutomatic;
         public final ForgeConfigSpec.ConfigValue<Boolean> pickupCrouching;
         public final ForgeConfigSpec.ConfigValue<Boolean> combining;
-        //public final ForgeConfigSpec.ConfigValue<List<? extends String>> collectionTool;
+        public final ForgeConfigSpec.ConfigValue<List<String>> collectionTool;
         public final ForgeConfigSpec.ConfigValue<InteractionHand> collectionToolHand;
 
         GameplaySettings(ForgeConfigSpec.Builder builder)
@@ -44,7 +48,7 @@ public class CIEConfigHandler
             pickupAutomatic = builder.comment("Should item entities be picked up automatically?", "Default = false", "Vanilla = true").define("Automatic Pickup", false);
             pickupCrouching = builder.comment("Should item entities only be picked up when sneaking?", "Default = false", "Vanilla = false").define("Sneaking Pickup", false);
             combining = builder.comment("Should item entities be combined in the world?", "Default = false", "Vanilla = true").define("Combining", false);
-            //collectionTool = builder.comment("Tools which enable picking up items automatically when held in the off-hand").defineList("Collection Tool", Lists.newArrayList("minecraft:bucket"), rawName -> rawName instanceof String);
+            collectionTool = builder.comment("Tools which enable picking up items automatically when held in the off-hand").define("Collection Tool", new ArrayList<>());
             collectionToolHand = builder.comment("Tools which enable picking up items automatically when held").define("Collection Tool Hand", InteractionHand.OFF_HAND);
 
             builder.pop();
@@ -59,7 +63,7 @@ public class CIEConfigHandler
 
         RenderingSettings(ForgeConfigSpec.Builder builder)
         {
-            builder.push("Gameplay Settings");
+            builder.push("Rendering Settings");
 
             variationStrength = builder.comment("Strength of the angular variation", "Default = 10", "Vanilla = 0").define("Variation", 10);
             bob = builder.comment("Should item entities have a bob effect?", "Default = false", "Vanilla = true").define("Bob", false);
