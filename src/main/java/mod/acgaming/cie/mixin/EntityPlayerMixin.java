@@ -8,11 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import mod.acgaming.cie.CIE;
 import mod.acgaming.cie.config.CIEConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -57,18 +55,7 @@ public abstract class EntityPlayerMixin extends EntityLivingBase
         {
             double d0 = this.posY - 0.3D + (double) this.getEyeHeight();
 
-            double xOffset = 0.0D;
-            double zOffset = 0.0D;
-
-            if (CIEConfig.gDropOffset || CIE.aquaacrobatics)
-            {
-                if (this.getHorizontalFacing() == EnumFacing.NORTH) zOffset = -0.5D;
-                else if (this.getHorizontalFacing() == EnumFacing.EAST) xOffset = 0.5D;
-                else if (this.getHorizontalFacing() == EnumFacing.SOUTH) zOffset = 0.5D;
-                else if (this.getHorizontalFacing() == EnumFacing.WEST) xOffset = -0.5D;
-            }
-
-            EntityItem entityitem = new EntityItem(this.world, this.posX + xOffset, d0, this.posZ + zOffset, droppedItem);
+            EntityItem entityitem = new EntityItem(this.world, this.posX, d0, this.posZ, droppedItem);
             entityitem.setPickupDelay(CIEConfig.gPickupDelay);
 
             if (traceItem)

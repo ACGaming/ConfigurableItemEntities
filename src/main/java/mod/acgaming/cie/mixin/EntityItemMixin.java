@@ -29,14 +29,14 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public AxisAlignedBB getCollisionBoundingBox()
     {
-        if (CIEConfig.gItemPhysics) return this.getEntityBoundingBox();
+        if (this.ticksExisted > 10 && CIEConfig.gItemPhysics) return this.getEntityBoundingBox();
         else return null;
     }
 
     @Override
     public void applyEntityCollision(Entity entity)
     {
-        if (CIEConfig.gItemPhysics)
+        if (this.ticksExisted > 10 && CIEConfig.gItemPhysics)
         {
             if (entity instanceof EntityItem)
             {
@@ -59,13 +59,13 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public boolean canBeCollidedWith()
     {
-        return CIEConfig.gItemPhysics || !Loader.isModLoaded("realdrops");
+        return this.ticksExisted > 10 && CIEConfig.gItemPhysics || !Loader.isModLoaded("realdrops");
     }
 
     @Override
     public boolean canBePushed()
     {
-        return CIEConfig.gItemPhysics;
+        return this.ticksExisted > 10 && CIEConfig.gItemPhysics;
     }
 
     @Override
@@ -88,7 +88,7 @@ public abstract class EntityItemMixin extends Entity
     @Override
     public AxisAlignedBB getCollisionBox(Entity entity)
     {
-        return CIEConfig.gItemPhysics || entity.canBePushed() ? entity.getEntityBoundingBox() : null;
+        return this.ticksExisted > 10 && CIEConfig.gItemPhysics || entity.canBePushed() ? entity.getEntityBoundingBox() : null;
     }
 
     @Inject(method = "onCollideWithPlayer", at = @At("HEAD"), cancellable = true)

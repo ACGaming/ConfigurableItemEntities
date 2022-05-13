@@ -45,10 +45,6 @@ public class CIEConfig
     @Config.Comment({"Pickup delay after dropping items", "Default = 20", "Vanilla = 40"})
     public static int gPickupDelay = 20;
 
-    @Config.Name("[Gameplay] Drop Offset")
-    @Config.Comment({"Should items be dropped a bit away from the player to avoid collision?", "Is always active when Aqua Acrobatics is installed", "Default = false", "Vanilla = false"})
-    public static boolean gDropOffset = false;
-
     @Config.Name("[Rendering] Bob")
     @Config.Comment({"Should item entities have a bob effect?", "Default = false", "Vanilla = true"})
     public static boolean rBob = false;
