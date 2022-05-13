@@ -13,7 +13,6 @@ import mod.acgaming.cie.config.CIEConfigHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,7 +27,6 @@ public abstract class ItemEntityMixin extends Entity
         if (!CIEConfigHandler.GAMEPLAY_SETTINGS.combining.get()) cir.setReturnValue(false);
     }
 
-    @Unique
     public boolean playerInteraction;
 
     @Shadow
@@ -84,19 +82,15 @@ public abstract class ItemEntityMixin extends Entity
     @Override
     public boolean canCollideWith(Entity entity)
     {
-        return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
+        if (tickCount > 10) return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
+        else return false;
     }
 
     @Override
     public boolean canBeCollidedWith()
     {
-        return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
-    }
-
-    @Override
-    public boolean isAttackable()
-    {
-        return false;
+        if (tickCount > 10) return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
+        else return false;
     }
 
     @Override
