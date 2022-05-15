@@ -43,13 +43,16 @@ public abstract class ItemEntityMixin extends Entity
     @Override
     public void push(Entity entity)
     {
-        if (entity.getBoundingBox().minY < this.getBoundingBox().maxY)
+        if (this.tickCount > 10 && CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get())
         {
-            super.push(entity);
-        }
-        else if (entity.getBoundingBox().minY <= this.getBoundingBox().minY)
-        {
-            super.push(entity);
+            if (entity.getBoundingBox().minY < this.getBoundingBox().maxY)
+            {
+                super.push(entity);
+            }
+            else if (entity.getBoundingBox().minY <= this.getBoundingBox().minY)
+            {
+                super.push(entity);
+            }
         }
     }
 
@@ -62,7 +65,7 @@ public abstract class ItemEntityMixin extends Entity
     @Override
     public boolean isPushable()
     {
-        return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get() && !this.isRemoved();
+        return this.tickCount > 10 && CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get() && !this.isRemoved();
     }
 
     @Override
@@ -82,15 +85,13 @@ public abstract class ItemEntityMixin extends Entity
     @Override
     public boolean canCollideWith(Entity entity)
     {
-        if (tickCount > 10) return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
-        else return false;
+        return this.tickCount > 10 && CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
     }
 
     @Override
     public boolean canBeCollidedWith()
     {
-        if (tickCount > 10) return CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
-        else return false;
+        return this.tickCount > 10 && CIEConfigHandler.GAMEPLAY_SETTINGS.itemPhysics.get();
     }
 
     @Override
