@@ -16,7 +16,7 @@ public class CIEConfigHandler
 
     public static boolean isCollectionTool(Item item)
     {
-        String regName = item.getRegistryName().toString();
+        String regName = item.getDescriptionId();
         for (String s : CIEConfigHandler.GAMEPLAY_SETTINGS.collectionTool.get())
         {
             if (regName.equals(s))
