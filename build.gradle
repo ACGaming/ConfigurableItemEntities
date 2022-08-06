@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'org.spongepowered.mixin'
 
-version = "1.12.2-1.0.3"
+version = "1.12.2-1.0.4"
 group = "mod.acgaming.cie"
 archivesBaseName = "CIE"
 
@@ -67,6 +67,7 @@ repositories {
 
 dependencies {
 	deobfCompile "zone.rong:mixinbooter:4.2"
+	deobfCompile "curse.maven:potion-core-242872:2905184"
 }
 
 mixin {
